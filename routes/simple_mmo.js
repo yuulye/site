@@ -2,9 +2,40 @@ var express = require('express');
 var router = express.Router();
 
 const config = require('../core/config');
+const access = config.simpleMMO.access;
 const url = 'https://web.simple-mmo.com/';
 const fetch = require('node-fetch');
 const cheerio = require('cheerio');
+
+router.get('/guild/:id', async (req, res, next) => {
+  const id = req.params.id;
+  if (!id) throw new Error('guild id required!');
+  let status = false;
+  let html = false;
+  await fetch(`${url}guilds/view/${id}`, access)
+  .then(res => Promise.all([res.status, res.text()]))
+  .then(([_status, _html]) => {
+    status = _status;
+    html = _html;
+  });
+  console.log({status, html});
+  if (status !== 200) {
+    let message = '';
+    if (status === 500) {
+      message = `: it seems that the guild id [${id}]`
+        + ` doesn't exist`
+      ;
+    }
+    try {
+      throw new Error('Error! ' + status + message);
+    } catch (e) {
+      next(e);
+    }
+  }
+  console.log(html);
+  const data = {players: [], id: req};
+  res.render('smmo/guild', data);
+});
 
 router.get('/', async function(req, res, next) {
   const data = {players: []};

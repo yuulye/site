@@ -1,56 +1,31 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <link rel="shortcut icon" href="#">
-    <title><%= title %></title>
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0"
-    />
-    <link
-      rel="stylesheet"
-      href="/font-awesome-4.7.0/css/font-awesome.min.css"
-    />
-<style>
-html {
-  font-size: 12px;
-}
-.number {
-  font-family: monospace;
-  text-align: right;
-  font-size: 11px;
-}
-</style>
-  </head>
-  <body>
-    <h3>
-      <a href="/">Home</a>
-      |
-      <%= title %>
-    </h3>
-    <hr/>
-    <table border=1>
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>name</th>
-          <th>level</th>
-          <th>steps</th>
-        </tr>
-      </thead>
-      <tbody id="table"></tbody>
-    </table>
+<h3>
+  <a href="/">Home</a>
+  |
+  <%= title %>
+</h3>
+<hr/>
+<table border=1>
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>name</th>
+      <th>level</th>
+      <th>steps</th>
+    </tr>
+  </thead>
+  <tbody id="table"></tbody>
+</table>
 
-    <div style="display: none">
-      <table>
-        <tr id="tplTR">
-          <td class="pos number"></td>
-          <td class="name"></td>
-          <td class="level number"></td>
-          <td class="steps number"></td>
-        </tr>
-      </table>
-    </div>
+<div style="display: none">
+  <table>
+    <tr id="tplTR">
+      <td class="pos number"></td>
+      <td class="name"></td>
+      <td class="level number"></td>
+      <td class="steps number"></td>
+    </tr>
+  </table>
+</div>
 
 <script
   src="https://code.jquery.com/jquery-3.5.1.min.js"
@@ -123,5 +98,3 @@ $(() => {
 /* code */
 </script>
 
-  </body>
-</html>
