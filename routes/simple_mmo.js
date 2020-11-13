@@ -29,6 +29,7 @@ router.get('/', async function(req, res, next) {
     496003,
     497367,
   ];
+
   for (let i = 0; i < players.length; i++) {
     const o = players[i];
     await fetch(`${url}user/view/${o}`, config.simpleMMO.access)
