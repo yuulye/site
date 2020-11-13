@@ -53,7 +53,6 @@ $(() => {
   players.sort((a, b) => b.level - a.level);
   for (let i = 0; i < players.length; i++) {
     const o = players[i];
-    const p = old.find(el => el.id === o.id);
 
     const el = $(tplTR).clone(false).removeAttr('id');
     el.find(".pos").text(i+1);
@@ -61,16 +60,20 @@ $(() => {
     $(table).append(el);
 
     let level = o.level;
-    if (p.id && p.level !== o.level) {
-      let status = 'down';
-      let color = 'red';
-      if (o.level > p.level) {
-        status = 'up';
-        color = 'green';
+
+    if (old) {
+      const p = old.find(el => el.id === o.id);
+      if (p.id && p.level !== o.level) {
+        let status = 'down';
+        let color = 'red';
+        if (o.level > p.level) {
+          status = 'up';
+          color = 'green';
+        }
+        level += ` <i style="color: ${color}"`
+          + ` class="fa fa-caret-${status}"></i>`
+        ;
       }
-      level += ` <i style="color: ${color}"`
-        + ` class="fa fa-caret-${status}"></i>`
-      ;
     }
     el.find(".level").html(level);
   }
