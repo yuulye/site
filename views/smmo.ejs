@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title><%= title %></title>
+  </head>
+  <body>
+    <h1>
+      <a href="/">Home</a>
+      |
+      <%= title %>
+    </h1>
+    <hr/>
+    <table border=1>
+      <tr>
+        <th>name</th>
+        <th>level</th>
+      </tr>
+      <%
+        for (let i = 0; i < players.length; i++) {
+        const o = players[i];
+      %>
+        <tr>
+          <td><%- o.name %></td>
+          <td align="right"><%- o.level %></td>
+        </tr>
+      <% } %>
+    </table>
+  </body>
+</html>
