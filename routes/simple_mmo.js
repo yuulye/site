@@ -37,12 +37,17 @@ router.get('/', async function(req, res, next) {
       const $ = cheerio.load(body);
       const name = $(".kt-user-card__name").text().split('\n');
       const player = {
+        id: o,
         name: name[4],
         level: Number(name[5].split(' ')[1]),
       };
       data.players.push(player);
     });
   }
+  /*
+  console.log(data.players);
+  */
+
   res.render('smmo', data);
 });
 

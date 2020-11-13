@@ -22,6 +22,8 @@ app.use((req, res, next) => {
   next();
 });
 
+app.use('/', express.static(path.join(__dirname, 'public')));
+
 // custom
 
 app.use(logger('dev'));

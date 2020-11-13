@@ -6,6 +6,10 @@
       content="width=device-width, initial-scale=1.0"
     />
     <title><%= title %></title>
+    <link
+      rel="stylesheet"
+      href="/font-awesome-4.7.0/css/font-awesome.min.css"
+    />
   </head>
   <body>
     <h1>
@@ -15,19 +19,65 @@
     </h1>
     <hr/>
     <table border=1>
-      <tr>
-        <th>name</th>
-        <th>level</th>
-      </tr>
-      <%
-        for (let i = 0; i < players.length; i++) {
-        const o = players[i];
-      %>
+      <thead>
         <tr>
-          <td><%- o.name %></td>
-          <td align="right"><%- o.level %></td>
+          <th>#</th>
+          <th>name</th>
+          <th>level</th>
         </tr>
-      <% } %>
+      </thead>
+      <tbody id="table"></tbody>
     </table>
+
+    <div style="display: none">
+      <table>
+        <tr id="tplTR">
+          <td class="pos"></td>
+          <td class="name"></td>
+          <td class="level"></td>
+        </tr>
+      </table>
+    </div>
+
+<script
+  src="https://code.jquery.com/jquery-3.5.1.min.js"
+  integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+  crossorigin="anonymous"
+></script>
+
+<script>
+/* code */
+$(() => {
+  const old = JSON.parse(localStorage.getItem('players'));
+  const players = <%- JSON.stringify(players) %>;
+  players.sort((a, b) => b.level - a.level);
+  for (let i = 0; i < players.length; i++) {
+    const o = players[i];
+    const p = old.find(el => el.id === o.id);
+
+    const el = $(tplTR).clone(false).removeAttr('id');
+    el.find(".pos").text(i+1);
+    el.find(".name").text(o.name);
+    $(table).append(el);
+
+    let level = o.level;
+    if (p.id && p.level !== o.level) {
+      let status = 'down';
+      let color = 'red';
+      if (o.level > p.level) {
+        status = 'up';
+        color = 'green';
+      }
+      level += ` <i style="color: ${color}"`
+        + ` class="fa fa-caret-${status}"></i>`
+      ;
+    }
+    el.find(".level").html(level);
+  }
+  localStorage.setItem('players', JSON.stringify(players));
+});
+/* code */
+</script>
+
   </body>
 </html>
