@@ -15,6 +15,11 @@
 html {
   font-size: 12px;
 }
+.number {
+  font-family: monospace;
+  text-align: right;
+  font-size: 11px;
+}
 </style>
   </head>
   <body>
@@ -30,6 +35,7 @@ html {
           <th>#</th>
           <th>name</th>
           <th>level</th>
+          <th>steps</th>
         </tr>
       </thead>
       <tbody id="table"></tbody>
@@ -38,9 +44,10 @@ html {
     <div style="display: none">
       <table>
         <tr id="tplTR">
-          <td class="pos" align="right"></td>
+          <td class="pos number"></td>
           <td class="name"></td>
-          <td class="level" align="right"></td>
+          <td class="level number"></td>
+          <td class="steps number"></td>
         </tr>
       </table>
     </div>
@@ -66,23 +73,50 @@ $(() => {
     $(table).append(el);
 
     let level = o.level;
+    let steps = o.steps;
 
     if (old) {
       const p = old.find(el => el.id === o.id);
-      if (p.id && p.level !== o.level) {
+      if (p) {
         let status = 'down';
         let color = 'red';
-        if (o.level > p.level) {
-          status = 'up';
-          color = 'green';
+
+        // level
+        if (p.level !== o.level) {
+
+          if (o.level > p.level) {
+            status = 'up';
+            color = 'green';
+          }
+          level = `<i style="color: ${color}"`
+            + ` class="fa fa-caret-${status}"></i> `
+            + level 
+          ;
         }
-        level = `<i style="color: ${color}"`
-          + ` class="fa fa-caret-${status}"></i> `
-          + level 
-        ;
+
+        // steps
+        status = 'down';
+        color = 'red';
+        if (
+          steps && p.steps && o.steps
+          &&
+          p.steps !== o.steps
+        ) {
+          if (
+            Number(o.steps.replace(',', '')) > Number(p.steps.replace(',', ''))
+          ) {
+            status = 'up';
+            color = 'green';
+          }
+          steps = `<i style="color: ${color}"`
+            + ` class="fa fa-caret-${status}"></i> `
+            + steps 
+          ;
+        }
       }
     }
     el.find(".level").html(level);
+    el.find(".steps").html(steps);
   }
   localStorage.setItem('players', JSON.stringify(players));
 });
