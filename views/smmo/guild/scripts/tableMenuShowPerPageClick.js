@@ -1,52 +1,40 @@
-let currentPage = 1;
-let perPage = false;
-let rows = false;
-let maxPage = 1;
-
-function setPerPage() {
-  perPage = $(inputPerPage).val();
-  if (!Number(perPage)) alert(`${perPage} is not a number`);
-  perPage = Number(perPage);
-}
-
-function update() {
-  rows.hide();
-  const startIndex = (currentPage - 1) * perPage;
-  const until = startIndex + perPage;
-  for (let i = startIndex; i < until; i++) {
-    $(rows[i]).show();
+function updateSort(e, index) {
+  $(".sortToggle").find(".fa").remove();
+  let state = 'down';
+  const status = rows.sort(index);
+  if (status === null) return;
+  if (status === true) {
+    state = 'up';
   }
-  $(tablePagination).find(".current").text(currentPage);
-  maxPage = Math.ceil(rows.length / perPage);
-  $(tablePagination).find(".total").text(maxPage);
+  $(e).append(`<i class="fa fa-caret-${state}">&nbsp;</i>`);
 }
+
+$(sortUpdate).click(function() {
+  updateSort(this, 7);
+});
+$(sortLevel).click(function() {
+  updateSort(this, 3);
+});
+$(sortName).click(function() {
+  updateSort(this, 1);
+});
 
 $(tableMenuShowPerPage).click(() => {
-  setPerPage();
-  rows = $(table).find("tr");
-  currentPage = 1;
-  update();
-  $(tablePagination).show();
+  rows.initPagination();
 });
 
 $(pageNext).click(() => {
-  currentPage++;
-  if (currentPage > maxPage) currentPage = 1;
-  update();
+  rows.update('next');
 });
 
 $(pagePrevious).click(() => {
-  currentPage--;
-  if (currentPage < 1) currentPage = maxPage;
-  update();
+  rows.update('prev');
 });
 
 $(pageFirst).click(() => {
-  currentPage = 1;
-  update();
+  rows.update('first');
 });
 
 $(pageLast).click(() => {
-  currentPage = maxPage;
-  update();
+  rows.update('last');
 });

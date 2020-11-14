@@ -25,6 +25,8 @@
 
 <div id="menu">
   <button id="menuFetch">Fetch Data</button>
+  &nbsp;
+  <button onclick="localStorage.clear()">Clear Local Storage</button>
 </div>
 <br/>
 
@@ -61,9 +63,15 @@
       <thead>
         <tr>
           <th>#</th>
-          <th>name</th>
-          <th>level</th>
-          <th>update</th>
+          <th id="sortName" class="sortToggle">
+            <a href="javascript:;">name</a>
+          </th>
+          <th id="sortLevel" class="sortToggle">
+            <a href="javascript:;">level</a>
+          </th>
+          <th id="sortUpdate" class="sortToggle">
+            <a href="javascript:;">update</a>
+          </th>
         </tr>
       </thead>
       <tbody id="table"></tbody>

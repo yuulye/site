@@ -6,6 +6,7 @@ const access = config.simpleMMO.access;
 const url = 'https://web.simple-mmo.com/';
 const fetch = require('node-fetch');
 const cheerio = require('cheerio');
+const moment = require('moment');
 
 async function fetchGuild(id, page) {
   let status = html = false;
@@ -52,10 +53,11 @@ function membersParse(html) {
       `if (!window.__cfRLUnblockHandlers) return false; showUser(`
       , ''
     ).replace(`);`, '');
-    console.log(s);
     const es = s.split(',').map(
       e => e.replace(/^\'+|\'+$/g, '')
     );
+    const dur = es[5].split(' ');
+    es[7] = moment.duration(dur[0], dur[1]).asSeconds();
     members.push(es);
   });
 

@@ -15,12 +15,12 @@ $(menuFetch).click(() => {
     $("#header div.wrapper").show();
 
     if (Array.isArray(data.members) && data.members.length) {
-      members = data.members;
+      const members = data.members;
       storageMembers.push(members);
       localStorage.setItem(
         'members', JSON.stringify(storageMembers)
       );
-    }
-    updateTable();
+      rows = new Rows(members);
+    } else alert(`Couldn't get members data`);
   });
 });
