@@ -1,3 +1,9 @@
+console.log(
+  `\n\n>>> App restarted ${(new Date()).toTimeString()}`
+);
+
+//-----------------------------------------------------------
+
 var config = require('./core/config');
 var createError = require('http-errors');
 var express = require('express');
@@ -5,6 +11,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var expressLayouts = require('express-ejs-layouts');
+var ejs = require('ejs');
 
 
 var indexRouter = require('./routes/index');
@@ -14,6 +21,7 @@ var simpleMMORouter = require('./routes/simple_mmo');
 var app = express();
 
 // view engine setup
+
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
