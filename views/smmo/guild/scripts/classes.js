@@ -9,6 +9,7 @@ class Rows {
     this.maxPage = 1;
 
     this.init();
+    this.update();
   }
 
   hide() {
