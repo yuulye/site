@@ -7,7 +7,6 @@ class Rows {
     this.currentPage = 1;
     this.perPage = members.length;
     this.maxPage = 1;
-    this.shown = 0;
 
     this.init();
   }
@@ -35,15 +34,21 @@ class Rows {
     }
     this.hide();
     const startIndex = (this.currentPage - 1) * this.perPage;
-    const until = startIndex + this.perPage;
-    this.shown = 0;
+    let until = startIndex + this.perPage;
+    if (until > this.rows.length) until = this.rows.length;
+    let shown = 0;
     for (let i = startIndex; i < until; i++) {
       this.rows[i].el.show();
-      this.shown++;
+      shown++;
     }
     $(tablePagination).find(".current").text(this.currentPage);
     this.maxPage = Math.ceil(this.rows.length / this.perPage);
     $(tablePagination).find(".total").text(this.maxPage);
+    if (shown < this.rows.length) {
+      $(tablePagination).show();
+    } else {
+      $(tablePagination).hide();
+    }
   }
 
   initPagination() {
@@ -55,9 +60,6 @@ class Rows {
     }
     this.currentPage = 1;
     this.update();
-    if (this.shown < this.rows.length) {
-      $(tablePagination).show();
-    }
   }
 
   sort(index) {

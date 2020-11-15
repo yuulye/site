@@ -5,5 +5,5 @@ if (!storageMembers) storageMembers = [[]];
 
 let rows = new Rows(storageMembers[storageMembers.length - 1]);
 
-<%- include('menuFetchClick.js') %>
-<%- include('tableMenuShowPerPageClick.js') %>
+<%- include('menuFetchEvent.js') %>
+<%- include('tablePaginationEvent.js') %>
