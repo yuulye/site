@@ -1,0 +1,16 @@
+body {
+  font-size: 12px;
+}
+body, h1, h2, h3, h4, h5, h6 {
+  margin: 2px;
+}
+hr {
+  margin-block-start: 8px;
+  margin-block-end: 8px;
+}
+
+.number {
+  font-family: monospace;
+  text-align: right;
+  font-size: 10px;
+}
