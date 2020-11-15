@@ -13,7 +13,6 @@ var logger = require('morgan');
 var expressLayouts = require('express-ejs-layouts');
 var ejs = require('ejs');
 
-
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var simpleMMORouter = require('./routes/simple_mmo');
