@@ -67,21 +67,54 @@ router.post('/guild/:id', async (req, res, next) => {
   return res.json(locals);
 });
 
+router.get('/user/:id', async (req, res, next) => {
+  const id = req.params.id;
+  let status = html = false;
+  [status, html] = await fetchUser(id);
+
+  const user = userParse(html);
+
+  const locals = {user: user};
+  return res.json(locals);
+});
+
 // --------- routes
 
-async function fetchGuild(id, page) {
+async function _fetch(uri) {
   let status = html = false;
-  let uri = `${url}guilds/view/${id}`;
-  if (page) {
-    uri += '/members?page=' + page;
-  }
-  await fetch(uri, access)
-  .then(res => Promise.all([res.status, res.text()]))
-  .then(([_status, _html]) => {
+  await fetch(uri, access).then(
+    res => Promise.all([res.status, res.text()])
+  ).then(([_status, _html]) => {
     status = _status;
     html = _html;
   });
   return [status, html];
+}
+
+async function fetchUser(id) {
+  let uri = `${url}user/view/${id}`;
+  return _fetch(uri);
+}
+
+async function fetchGuild(id, page) {
+  let uri = `${url}guilds/view/${id}`;
+  if (page) {
+    uri += '/members?page=' + page;
+  }
+  return _fetch(uri);
+}
+
+function userParse(html) {
+  const $ = cheerio.load(html);
+  const guildAndJob = $(
+    ".kt-widget__info.kt-margin-t-5 .kt-widget__title"
+  );
+  const guild = $(guildAndJob.get(0)).text();
+  const job = $(guildAndJob.get(1)).text();
+
+  return {
+    guild: guild, job: job,
+  };
 }
 
 function guildParse(html) {
