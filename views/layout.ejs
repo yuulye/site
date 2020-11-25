@@ -3,12 +3,20 @@
 <head>
   <link rel="shortcut icon" href="/y.png">
   <title><%= title %></title>
+
+  <!-- metas -->
   <meta
     name="viewport"
     content="width=device-width, initial-scale=1.0"
   />
+  <meta
+    name="google-site-verification"
+    content="WrukRq-XC2iMdmPLMqG9e5f7knkB2TIruplN38hec2E"
+  />
   <meta name="theme-color" content="#555"/>
   <%- include('font.ejs') %>
+
+  <!-- assets -->
   <link
     href="/fontawesome-free-5.15.1-web/css/all.css"
     rel="stylesheet"
@@ -20,11 +28,7 @@
     integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
     crossorigin="anonymous"
   ></script>
-  <style><%- include('style.css') %></style>
-  <style><%- include('grid.css') %></style>
-</head>
-<body>
-  <%- body %>
+
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script
     async
@@ -38,5 +42,10 @@
     gtag('config', 'UA-110805480-1');
   </script>
 
+  <style><%- include('style.css') %></style>
+  <style><%- include('grid.css') %></style>
+</head>
+<body>
+  <%- body %>
 </body>
 </html>
