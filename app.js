@@ -1,5 +1,5 @@
 console.log(
-`${'\n'.repeat(64)}>>> App restarted ${(new Date()).toTimeString()}`
+`${'\n'.repeat(32)}>>> App restarted ${(new Date()).toTimeString()}`
 );
 
 //-----------------------------------------------------------
