@@ -5,7 +5,7 @@
 body {
   font-family: Montserrat, 'Sans Serif';
   font-size: 14px;
-  font-weight: 400;
+  font-weight: 300;
 
   word-spacing: .1715em;
   line-height: 1.5em;
@@ -15,7 +15,8 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  margin: 2px;
+  margin: 0px;
+  padding: 4px;
 }
 
 .content {
@@ -42,6 +43,16 @@ hr {
   margin-block-start: 8px;
   margin-block-end: 8px;
   border-color: rgba(0, 0, 0, .07);
+}
+
+q {
+  quotes: "“" "”" "‘" "’";
+}
+q::before {
+    content: open-quote;
+}
+q::after {
+    content: close-quote;
 }
 
 .monitor {
