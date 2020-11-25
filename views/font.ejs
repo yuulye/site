@@ -1,0 +1,62 @@
+<%
+const fonts = [
+  {
+    name: 'Ubuntu',
+    size: '0,300;1,300',
+  },
+  {
+     name: 'Ubuntu+Mono',
+     size: '0,400;0,700;1,400;1,700',
+  },
+  {
+     name: 'Source+Code+Pro',
+     size: '0,400;0,700;1,400;1,700',
+  },
+];
+
+class FontItem {
+  constructor(data) {
+    this.data = data;
+    this.url =
+      'family=' + data.name + ':'
+      + 'ital,wght@' + data.size
+    ;
+  }
+}
+
+class Font {
+  constructor(items) {
+    this.items = [];
+    for (let i = 0; i < items.length; i++) {
+      const o = items[i];
+      const item = new FontItem(o);
+      this.items.push(item);
+    }
+  }
+
+  get(name) {
+    const o = this.items.find(e => e.data.name === name);
+    return o.url;
+  }
+}
+
+const font = new Font(fonts);
+const fontLink = 
+  'https://fonts.googleapis.com/css2?' +
+  [
+    font.get('Source+Code+Pro'),
+    font.get('Ubuntu'),
+    font.get('Ubuntu+Mono'),
+  ].join('&')
+  + '&display=swap'
+;
+%>
+
+<link
+  rel="preconnect"
+  href="https://fonts.gstatic.com"
+/>
+<link
+  href="<%- fontLink %>"
+  rel="stylesheet"
+/>
