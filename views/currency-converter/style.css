@@ -1,0 +1,82 @@
+input:focus, button:focus {
+  outline: none;
+}
+
+input {
+  border: 1px solid white;
+  background: none;
+  box-shadow: none;
+  border-radius: 0px;
+}
+
+select {
+  width: 128px;
+}
+
+.main {
+  background: #2E006B;
+  padding: 32px 16px 96px;
+  text-align: center;
+}
+
+#input {
+  background: #2E006B;
+  color: white;
+}
+
+input:disabled {
+  color: black;
+  background: white;
+}
+
+input {
+  font-family: 'Source Code Pro', monospace;
+  font-weight: bold;
+  font-size: 16px;
+  width: 100%;
+  padding: 16px 11%;
+  border-radius: 8px;
+}
+
+.input-wrapper {
+  position: relative;
+}
+
+.flag, .select2 {
+  position: absolute !important;
+}
+
+.flag {
+  z-index: 1;
+  left: 1%;
+  top: 11px;
+}
+
+.select2 {
+  right: 1%;
+  top: 13px;
+}
+
+.convert {
+  font-size: 100%;
+  vertical-align: baseline;
+  box-sizing: border-box;
+  line-height: normal;
+  text-transform: none;
+  cursor: pointer;
+  color: #222;
+  font-family: "Karla",sans-serif;
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  background: none;
+  border: none;
+  position: absolute;
+  margin: auto;
+  left: 0px;
+  right: 0px;
+  top: 0px;
+  bottom: 0px;
+  height: 92px;
+  width: 92px;
+}
